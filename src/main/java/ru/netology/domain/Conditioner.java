@@ -1,6 +1,7 @@
 package ru.netology.domain;
 
 public class Conditioner {
+    private int id;
     private String name;
     private int maxTemperature;
     private int minTemperature;
@@ -13,6 +14,7 @@ public class Conditioner {
         }
         this.currentTemperature = ++currentTemperature;
     }
+
     public void decreaseCurrentTemperature(){
         if (currentTemperature == minTemperature){
             return;
@@ -20,6 +22,13 @@ public class Conditioner {
         this.currentTemperature = --currentTemperature;
     }
 
+    public int getId() {
+        return id;
+    }
+
+    public void setId(int id) {
+        this.id = id;
+    }
 
     public String getName() {
         return name;

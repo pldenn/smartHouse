@@ -1,6 +1,7 @@
 package ru.netology.domain;
 
 public class Radio {
+    private int id;
     private int currentStation;
     private int currentVolume;
     private int maxStation = 9;
@@ -36,6 +37,14 @@ public class Radio {
             return;
         }
         this.currentVolume = --currentVolume;
+    }
+
+    public int getId() {
+        return id;
+    }
+
+    public void setId(int id) {
+        this.id = id;
     }
 
     public int getCurrentStation() {
