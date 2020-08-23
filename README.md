@@ -80,6 +80,7 @@
 
 <details>
   <summary>Решение задачи 3</summary>
+
 **1 COMPLEXITY = 1 Unit-test**
 ## Формулa вычисления количества unit-тестов на основании значений, генерируемых JaCoCo.
   
