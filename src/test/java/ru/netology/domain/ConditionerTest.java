@@ -1,49 +1,57 @@
 package ru.netology.domain;
 
+import org.junit.jupiter.api.Assertions;
+import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
-import static org.junit.jupiter.api.Assertions.*;
-
 class ConditionerTest {
+    Conditioner conditioner = new Conditioner();
 
-    @Test
-    public void shouldSetterLogic() {
-        Conditioner conditioner = new Conditioner();
+    @BeforeEach
+    public void setup() {
         conditioner.setMaxTemperature(30);
         conditioner.setMinTemperature(15);
-        assertEquals(0, conditioner.getCurrentTemperature());
-        conditioner.setCurrentTemperature(16);
-        assertEquals(16, conditioner.getCurrentTemperature());
-        conditioner.setCurrentTemperature(14);
-        assertEquals(16, conditioner.getCurrentTemperature());
-        conditioner.setCurrentTemperature(31);
-        assertEquals(16, conditioner.getCurrentTemperature());
-
-
     }
 
     @Test
-    public void shouldChangeTemperatureUp() {
-        Conditioner conditioner = new Conditioner();
-        conditioner.setMinTemperature(15);
-        conditioner.setMaxTemperature(30);
+    public void shouldIncrease() {
         conditioner.setCurrentTemperature(29);
         conditioner.increaseCurrentTemperature();
-        assertEquals(30, conditioner.getCurrentTemperature());
-        conditioner.increaseCurrentTemperature();
-        assertEquals(30, conditioner.getCurrentTemperature());
+        Assertions.assertEquals(30, conditioner.getCurrentTemperature());
     }
 
     @Test
-    public void shouldChangeTemperatureDown() {
-        Conditioner conditioner = new Conditioner();
-        conditioner.setMinTemperature(15);
-        conditioner.setMaxTemperature(30);
-        conditioner.setCurrentTemperature(16);
-        conditioner.decreaseCurrentTemperature();
-        assertEquals(15, conditioner.getCurrentTemperature());
-        conditioner.decreaseCurrentTemperature();
-        assertEquals(15, conditioner.getCurrentTemperature());
+    public void shouldNotIncrease() {
+        conditioner.setCurrentTemperature(30);
+        conditioner.increaseCurrentTemperature();
+        Assertions.assertEquals(30, conditioner.getCurrentTemperature());
     }
 
+    @Test
+    public void shouldDecrease() {
+        conditioner.setCurrentTemperature(16);
+        conditioner.decreaseCurrentTemperature();
+        Assertions.assertEquals(15, conditioner.getCurrentTemperature());
+    }
+
+    @Test
+    public void shouldNotDecrease() {
+        conditioner.setCurrentTemperature(15);
+        conditioner.decreaseCurrentTemperature();
+        Assertions.assertEquals(15, conditioner.getCurrentTemperature());
+    }
+
+    @Test
+    public void shouldNotSetUncorrectedMaxTemperature() {
+        conditioner.setCurrentTemperature(15);
+        conditioner.setCurrentTemperature(150);
+        Assertions.assertEquals(15, conditioner.getCurrentTemperature());
+    }
+
+    @Test
+    public void shouldNotSetUncorrectedMinTemperature() {
+        conditioner.setCurrentTemperature(15);
+        conditioner.setCurrentTemperature(1);
+        Assertions.assertEquals(15, conditioner.getCurrentTemperature());
+    }
 }
